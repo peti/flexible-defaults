@@ -6,9 +6,9 @@ cabal-version:          >= 1.6
 build-type:             Simple
 
 author:                 James Cook <mokus@deepbondi.net>
-maintainer:             James Cook <mokus@deepbondi.net>
+maintainer:             Peter Simons <simons@cryp.to>
 license:                PublicDomain
-homepage:               https://github.com/mokus0/flexible-defaults
+homepage:               https://github.com/peti/flexible-defaults
 
 category:               Code Generation, Template Haskell
 synopsis:               Generate default function implementations for complex type classes.
@@ -36,7 +36,7 @@ tested-with:            GHC == 7.0.4, GHC == 7.2.2, GHC == 7.4.2, GHC == 7.6.3,
 
 source-repository head
   type:                 git
-  location:             https://github.com/mokus0/flexible-defaults.git
+  location:             https://github.com/peti/flexible-defaults.git
 
 Library
   hs-source-dirs:       src
