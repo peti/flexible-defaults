@@ -1,3 +1,5 @@
+{-# LANGUAGE CPP #-}
+
 module Language.Haskell.TH.FlexibleDefaults.Solve 
     ( ImplSpec(..)
     , scoreImplSpec
@@ -14,6 +16,10 @@ import Data.Monoid
 import qualified Data.Map as M
 import qualified Data.Set as S
 import Language.Haskell.TH
+#if !(MIN_VERSION_base(4,8,0))
+-- starting with base-4.8, Monoid is rexported from Prelude
+import Data.Monoid
+#endif
 
 data ImplSpec s = ImplSpec
     { implScore     :: Maybe s

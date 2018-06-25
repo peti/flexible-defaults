@@ -49,3 +49,5 @@ Library
                         template-haskell,
                         th-extras,
                         transformers
+  if !impl(ghc >= 8.0)
+    build-depends:      semigroups == 0.18.*

@@ -6,6 +6,7 @@ import Control.Monad.Trans.Reader
 import Control.Monad.Trans.State
 import Control.Monad.Trans.Writer
 import Data.List
+import Data.Semigroup as Semigroup
 import Data.Monoid
 import qualified Data.Map as M
 import Data.Ord
@@ -21,10 +22,13 @@ newtype Impls s = Impls { unImpls :: M.Map String [ImplSpec s] }
 instance Functor Impls where
     fmap f (Impls m) = Impls (M.map (map (fmap f)) m)
 
+instance Semigroup.Semigroup (Impls s) where
+     (<>) (Impls x) (Impls y) = Impls (M.unionWith mappend x y)
+
 instance Monoid (Impls s) where
     mempty = Impls mempty
-    mappend (Impls x) (Impls y) = Impls (M.unionWith mappend x y)
-    
+    mappend = (Semigroup.<>)
+
 -- |A description of a system of 'Function's and default 'Implementation's 
 -- which can be used to complete a partial implementation of some type class.
 newtype Defaults s a = Defaults { unDefaults :: Writer (Impls s) a }
