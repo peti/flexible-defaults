@@ -1,7 +1,7 @@
 -- |A code-generation system for complex typeclass default-implementation
--- configurations.  There are usage examples in this package's source 
+-- configurations.  There are usage examples in this package's source
 -- distribution[1] and in the random-source package[2].
--- 
+--
 -- 1. <https://github.com/mokus0/flexible-defaults/tree/master/examples>
 --
 -- 2. <https://github.com/mokus0/random-fu/blob/master/random-source/src/Data/Random/Internal/TH.hs>
@@ -19,7 +19,7 @@ module Language.Haskell.TH.FlexibleDefaults
     , dependsOn
     , inline
     , noinline
-    
+
     , withDefaults
     , implementDefaults
     ) where
@@ -46,18 +46,18 @@ implementDefaults :: (Ord s, Monoid s) => Defaults s () -> [Dec] -> Q [Dec]
 implementDefaults defs futzedDecs = do
     let decs = genericalizeDecs futzedDecs
         prob = toProblem defs
-        
+
         implemented = S.fromList (map nameBase (concatMap namesBoundInDec decs))
         unimplemented = deleteKeys implemented prob
-        
+
         solutions = chooseImplementations unimplemented
-    
+
     implementations <- case solutions of
         []  -> fail "implementDefaults: incomplete set of basis functions"
-        ss  -> 
+        ss  ->
             let best = maximumBy (comparing scoreSolution) ss
              in sequence [ decQ | ImplSpec _ _ decQ <- M.elems best]
-    
+
     return (decs ++ concat implementations)
 
 -- TODO: maybe make this accept multiple instance declarations, and/or pass non-instance Dec's unmodified.
@@ -72,7 +72,7 @@ implementDefaults defs futzedDecs = do
 withDefaults :: (Monoid s, Ord s) => Defaults s () -> Q [Dec] -> Q [Dec]
 withDefaults defs decQ = do
     dec <- decQ
-    
+
     case dec of
 #if MIN_VERSION_template_haskell(2,11,0)
         [InstanceD ol clsCxt cls decs] -> do
@@ -83,6 +83,5 @@ withDefaults defs decQ = do
             impl <- implementDefaults defs decs
             return [InstanceD clsCxt cls impl]
 #endif
-        
-        _ -> fail "withDefaults: second parameter should be a single instance declaration"
 
+        _ -> fail "withDefaults: second parameter should be a single instance declaration"

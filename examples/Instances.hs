@@ -43,7 +43,7 @@ $(defaultsTest
         instance DefaultsTest Bool where
             foo True  = "0"
             foo False = "1"
-            
+
             baz = (||)
     |]
  )

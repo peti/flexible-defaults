@@ -1,6 +1,6 @@
 {-# LANGUAGE CPP #-}
 
-module Language.Haskell.TH.FlexibleDefaults.Solve 
+module Language.Haskell.TH.FlexibleDefaults.Solve
     ( ImplSpec(..)
     , scoreImplSpec
     , Problem
@@ -56,4 +56,3 @@ chooseImplementations unimplemented
         impl <- take 1 (filter (all implemented . dependencies) impls)
         otherImpls <- chooseImplementations newUnimplemented
         return (M.insert name impl otherImpls)
-

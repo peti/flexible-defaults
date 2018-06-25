@@ -16,16 +16,16 @@ import qualified Data.Set as S
 class DefaultsTest a where
     foo :: a -> String
     foo = error "foo not implemented"
-    
+
     bar :: a -> Int
     bar = error "bar not implemented"
-    
+
     baz :: a -> a -> a
     baz = error "baz not implemented"
-    
+
     qux :: a -> Integer
     qux = error "qux not implemented"
-    
+
     quux :: a -> Bool
     quux = error "quux not implemented"
 
@@ -35,27 +35,27 @@ defaults = scoreBy Sum $ do
         implementation $ do
             cost 1
             return [d| foo = filter isDigit . show |]
-    
+
     function "bar" $ do
         implementation $ do
             dependsOn "qux"
             return [d| bar = fromInteger . qux |]
-    
+
     function "baz" $ do
         implementation $ do
             score 1
             dependsOn "quux"
             return [d| baz x | quux x = const x
-                             | otherwise = id 
+                             | otherwise = id
                     |]
         implementation $ do
             return [d| baz = const |]
-    
+
     function "qux" $ do
         implementation $ do
             dependsOn "foo"
             return [d| qux = read . foo |]
-    
+
     function "quux" $ do
         implementation $ do
             cost 1
