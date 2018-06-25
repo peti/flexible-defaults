@@ -17,10 +17,10 @@ Icon?
 # Haskell #
 ###########
 
-dist
-*.o
-*.hi
+/dist-newstyle/*
+/dist/*
+/.*.environment.*
 *.chi
 *.chs.h
-
-
+*.hi
+*.o
