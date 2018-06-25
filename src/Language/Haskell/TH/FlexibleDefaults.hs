@@ -25,8 +25,11 @@ module Language.Haskell.TH.FlexibleDefaults
     ) where
 
 import Data.List
-import Data.Monoid 
 import Data.Ord
+#if !(MIN_VERSION_base(4,8,0))
+-- starting with base-4.8, Monoid is rexported from Prelude
+import Data.Monoid
+#endif
 import qualified Data.Map as M
 import qualified Data.Set as S
 import Language.Haskell.TH

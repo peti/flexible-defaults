@@ -12,7 +12,6 @@ module Language.Haskell.TH.FlexibleDefaults.Solve
 import Prelude hiding (all)
 import Data.Foldable (all)
 import Data.Maybe
-import Data.Monoid 
 import qualified Data.Map as M
 import qualified Data.Set as S
 import Language.Haskell.TH

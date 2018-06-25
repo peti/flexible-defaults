@@ -1,13 +1,16 @@
 {-# LANGUAGE GeneralizedNewtypeDeriving, CPP #-}
+
 module Language.Haskell.TH.FlexibleDefaults.DSL where
 
+#if !(MIN_VERSION_base(4,8,0))
+-- starting with base-4.8, Applicative is rexported from Prelude
 import Control.Applicative
+#endif
 import Control.Monad.Trans.Reader
 import Control.Monad.Trans.State
 import Control.Monad.Trans.Writer
 import Data.List
 import Data.Semigroup as Semigroup
-import Data.Monoid
 import qualified Data.Map as M
 import Data.Ord
 import qualified Data.Set as S
