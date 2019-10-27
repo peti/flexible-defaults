@@ -1,5 +1,5 @@
 name:                   flexible-defaults
-version:                0.0.2
+version:                0.0.3
 stability:              provisional
 
 cabal-version:          >= 1.6
