@@ -111,7 +111,7 @@ score s = Implementation $ do
     (oldS, deps, inl) <- get
     case oldS of
         Nothing -> put (Just s, deps, inl)
-        Just _  -> fail "score: score was already set"
+        Just _  -> error "score: score was already set"
 
 -- |Specify the cost (negated score) associated with the current implementation.
 -- Only one invocation of either 'score' or 'cost' may be used per implementation.
