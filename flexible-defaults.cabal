@@ -2,7 +2,7 @@ name:                   flexible-defaults
 version:                0.0.3
 stability:              provisional
 
-cabal-version:          >= 1.6
+cabal-version:          >= 1.8
 build-type:             Simple
 
 author:                 James Cook <mokus@deepbondi.net>
